@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>{{updateShow ? 'update company' : 'create a new company'}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Company name</ion-label>
+      <ion-input type="text" [(ngModel)]='name'></ion-input>
+    </ion-item>
+  </ion-list>
+  <button *ngIf="updateShow" clear ion-button item-left icon-left (click)="deleteCompany(name)">
+    <ion-icon name="delete"></ion-icon>
+    <div>remove</div>
+  </button>
+  <button *ngIf="updateShow" ion-button color="primary" item-right icon-left (click)="updateCompany(name)">
+    <ion-icon name="done-all"></ion-icon>
+    <div>update</div>
+  </button>
+  <button *ngIf="!updateShow" ion-button color="primary" item-right icon-left (click)="addCompany(name)">
+    <ion-icon name="done-all"></ion-icon>
+    <div>save</div>
+  </button>
+</ion-content>

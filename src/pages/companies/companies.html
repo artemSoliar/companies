@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar class="companies-page-navbar" color="primary" text-center>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      {{ 'Companies' }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-menu class="side-menu" type="overlay" [content]="compList">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Search by name</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-item>
+      <ion-label color="primary" floating>Company name</ion-label>
+      <ion-input #searchByName [(ngModel)]='query'></ion-input>
+    </ion-item>
+    <button class="menu-go-button" menuToggle ion-button (click)="handleSearch()" block>search</button>
+  </ion-content>
+</ion-menu>
+<ion-content #compList padding>
+  <ion-spinner *ngIf="!loadCompleted" name="crescent" class="companies-load-spinner"></ion-spinner>
+  <ion-grid *ngIf="query">
+    <ion-row center>
+      <ion-col col-10 center text-center>
+        <ion-note>
+          <span>Filter by name: </span>
+          <strong>{{query}} </strong>
+        </ion-note>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button small item-right (click)="clearQuery()" color="primary" round class="clear-btn">
+          <ion-icon name='close' item-right>
+          </ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card *ngFor="let company of companies">
+    <ion-card-content (click)="goToGoods(company)" item-left icon-right ion-item>
+      {{company.companyName}}
+      <button item-right clear middle (click)="goToUpdateCompany($event, company)">
+        <ion-icon name='more' item-right>
+        </ion-icon>
+      </button>
+    </ion-card-content>
+  </ion-card>
+  <button *ngIf="loadCompleted" ion-button block color="primary" item-right icon-left (click)="goToCreateCompany()">
+    <ion-icon name="add"></ion-icon>
+    <div>add company</div>
+  </button>
+</ion-content>

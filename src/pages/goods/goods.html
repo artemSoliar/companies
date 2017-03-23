@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{company.companyName}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row center>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label floating>new goods</ion-label>
+            <ion-input type="text" [(ngModel)]='newGoods'></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="primary" item-right icon-left (click)="addGoods()">
+          <ion-icon name="add"></ion-icon>
+          <div>add goods</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-spinner *ngIf="!loadCompleted" name="crescent" class="goods-load-spinner"></ion-spinner>
+  <ion-card *ngFor="let good of goods; let i = index;">
+    <ion-card-content item-left icon-right ion-item>
+      {{good}}
+      <button item-right clear (click)="deleteGoods(i)">
+        <ion-icon name='trash' item-right>
+        </ion-icon>
+      </button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
